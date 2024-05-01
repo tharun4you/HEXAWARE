@@ -1,0 +1,423 @@
+-----TASK 1-----
+
+
+
+1. mysql> create database SISDB;
+Query OK, 1 row affected (0.01 sec)
+
+2. mysql> CREATE TABLE Students (student_id INT, first_name VARCHAR(25), last_name VARCHAR(25), date_of_birth DATE, email VARCHAR(25), phone_number VARCHAR(15));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE Courses (course_id INT, course_name VARCHAR(25), credits INT, teacher_id INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Enrollments (enrollment_id INT, student_id INT, course_id INT, enrollment_date DATE);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Teacher (teacher_id INT, first_name VARCHAR(25), last_name VARCHAR(25), email VARCHAR(25));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Payments (payment_id INT, student_id INT, amount DECIMAL(10, 2), payment_date DATE);
+Query OK, 0 rows affected (0.03 sec)
+
+3. mysql> ALTER TABLE Students ADD PRIMARY KEY (student_id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Courses ADD PRIMARY KEY (course_id);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Courses ADD FOREIGN KEY (teacher_id) REFERENC
+ES Teacher(teacher_id);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Enrollments ADD PRIMARY KEY (enrollment_id);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Enrollments ADD FOREIGN KEY (student_id) REFERENCES Students(student_id);
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Enrollments ADD FOREIGN KEY (course_id) REFERENCES Courses(course_id);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Teacher ADD PRIMARY KEY (teacher_id);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Payments ADD PRIMARY KEY (payment_id);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Payments ADD FOREIGN KEY (student_id) REFERENCES Students(student_id);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+4. mysql> INSERT INTO Students VALUES
+    -> (1, 'Arun', 'Kumar', '2000-01-10', 'arun@gmail.com', '9876543210'),
+    -> (2, 'Bala', 'Murugan', '2001-02-15', 'bala@gmail.com', '9876543211'),
+    -> (3, 'Charu', 'Latha', '2002-03-20', 'charu@gmail.com', '9876543212'),
+    -> (4, 'Deepa', 'Malar', '2003-04-25', 'deepa@gmail.com', '9876543213'),
+    -> (5, 'Eshwar', 'Sekar', '2004-05-30', 'eshwar@gmail.com', '9876543214'),
+    -> (6, 'Farah', 'Nisha', '2005-06-05', 'farah@gmail.com', '9876543215'),
+    -> (7, 'Gokul', 'Nathan', '2006-07-10', 'gokul@gmail.com', '9876543216'),
+    -> (8, 'Hari', 'Prasad', '2007-08-15', 'hari@gmail.com', '9876543217'),
+    -> (9, 'Indra', 'Devi', '2008-09-20', 'indra@gmail.com', '9876543218'),
+    -> (10, 'Jeeva', 'Rani', '2009-10-25', 'jeeva@gmail.com', '9876543219');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Courses VALUES
+    -> (1, 'Introduction to Computing', 3, 1),
+    -> (2, 'Data Structures', 4, 2),
+    -> (3, 'Database Management', 3, 3),
+    -> (4, 'Operating Systems', 4, 4),
+    -> (5, 'Computer Networks', 3, 5),
+    -> (6, 'Web Development', 2, 6),
+    -> (7, 'Software Engineering', 4, 7),
+    -> (8, 'Artificial Intelligence', 5, 8),
+    -> (9, 'Machine Learning', 5, 9),
+    -> (10, 'Cloud Computing', 3, 10);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Enrollments VALUES
+    -> (1, 1, 1, '2023-02-01'),
+    -> (2, 2, 2, '2023-02-01'),
+    -> (3, 3, 3, '2023-02-01'),
+    -> (4, 4, 4, '2023-02-01'),
+    -> (5, 5, 5, '2023-02-01'),
+    -> (6, 6, 6, '2023-02-01'),
+    -> (7, 7, 7, '2023-02-01'),
+    -> (8, 8, 8, '2023-02-01'),
+    -> (9, 9, 9, '2023-02-01'),
+    -> (10, 10, 10, '2023-02-01');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Teacher VALUES
+    -> (1, 'Mohan', 'Das', 'mohan@gmail.com'),
+    -> (2, 'Nila', 'Mani', 'nila@gmail.com'),
+    -> (3, 'Oviya', 'Murali', 'oviya@gmail.com'),
+    -> (4, 'Prakash', 'Kumar', 'prakash@gmail.com'),
+    -> (5, 'Rani', 'Mukherjee', 'rani@gmail.com'),
+    -> (6, 'Siva', 'Perumal', 'siva@gmail.com'),
+    -> (7, 'Tara', 'Anbu', 'tara@gmail.com'),
+    -> (8, 'Uma', 'Raj', 'uma@gmail.com'),
+    -> (9, 'Vijay', 'Antony', 'vijay@gmail.com'),
+    -> (10, 'Yogi', 'Babu', 'yogi@gmail.com');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Payments VALUES
+    -> (1, 1, 1500.00, '2023-03-01'),
+    -> (2, 2, 1200.00, '2023-03-01'),
+    -> (3, 3, 1300.00, '2023-03-01'),
+    -> (4, 4, 1600.00, '2023-03-01'),
+    -> (5, 5, 1100.00, '2023-03-01'),
+    -> (6, 6, 1450.00, '2023-03-01'),
+    -> (7, 7, 1350.00, '2023-03-01'),
+    -> (8, 8, 1550.00, '2023-03-01'),
+    -> (9, 9, 1250.00, '2023-03-01'),
+    -> (10, 10, 1400.00, '2023-03-01');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+
+
+-----TASK 2-----
+
+
+
+1. mysql> INSERT INTO Students VALUES (11, 'John', 'Doe', '1995-08-15', 'john.doe@example.com', ' 1234567890');
+Query OK, 1 row affected (0.01 sec)
+
+2. mysql> INSERT INTO Enrollments VALUES (11, 11, 3, '2023-04-01');
+Query OK, 1 row affected (0.01 sec)
+
+3. mysql> UPDATE Teacher SET email='antony@gmail.com' WHERE teacher_id=9;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+4. mysql> DELETE FROM Enrollments WHERE student_id = 11 AND course_id = 3;
+Query OK, 1 row affected (0.01 sec)
+
+5. mysql> UPDATE Courses SET teacher_id=6 WHERE course_id=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+6. mysql> DELETE FROM Enrollments WHERE student_id = 11;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM Students WHERE student_id = 11;
+Query OK, 1 row affected (0.01 sec)
+
+7. mysql> UPDATE Payments SET amount=1700.00 WHERE payment_id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+-----TASK 3-----
+
+
+
+1. mysql> SELECT S.student_id, S.first_name, s.last_name, SUM(P.Amount) FROM Students S INNER JOIN Payments P ON s.student_id=p.student_id GROUP BY s.student_id;
++------------+------------+-----------+---------------+
+| student_id | first_name | last_name | SUM(P.Amount) |
++------------+------------+-----------+---------------+
+|          1 | Arun       | Kumar     |       1500.00 |
+|          2 | Bala       | Murugan   |       1200.00 |
+|          3 | Charu      | Latha     |       1300.00 |
+|          4 | Deepa      | Malar     |       1700.00 |
+|          5 | Eshwar     | Sekar     |       1100.00 |
+|          6 | Farah      | Nisha     |       1450.00 |
+|          7 | Gokul      | Nathan    |       1350.00 |
+|          8 | Hari       | Prasad    |       1550.00 |
+|          9 | Indra      | Devi      |       1250.00 |
+|         10 | Jeeva      | Rani      |       1400.00 |
++------------+------------+-----------+---------------+
+10 rows in set (0.03 sec)
+
+2. mysql>  SELECT C.course_id, C.course_name, COUNT(E.student_id) FROM Courses C LEFT JOIN Enrollments E ON c.course_id = e.course_id GROUP BY C.course_id;
++-----------+---------------------------+---------------------+
+| course_id | course_name               | COUNT(E.student_id) |
++-----------+---------------------------+---------------------+
+|         1 | Introduction to Computing |                   1 |
+|         2 | Data Structures           |                   1 |
+|         3 | Database Management       |                   1 |
+|         4 | Operating Systems         |                   1 |
+|         5 | Computer Networks         |                   1 |
+|         6 | Web Development           |                   1 |
+|         7 | Software Engineering      |                   1 |
+|         8 | Artificial Intelligence   |                   1 |
+|         9 | Machine Learning          |                   1 |
+|        10 | Cloud Computing           |                   1 |
++-----------+---------------------------+---------------------+
+10 rows in set (0.00 sec)
+
+3.mysql>  SELECT S.first_name, S.last_name FROM Students S LEFT JOIN Enrollments E ON S.student_id=E.student_id WHERE E.student_id IS NULL;
+Empty set (0.00 sec)
+
+4. mysql> SELECT s.first_name, s.last_name, c.course_name FROM Students s JOIN Enrollments e ON s.student_id = e.student_id JOIN Courses c ON e.course_id = c.course_id;
++------------+-----------+---------------------------+
+| first_name | last_name | course_name               |
++------------+-----------+---------------------------+
+| Arun       | Kumar     | Introduction to Computing |
+| Bala       | Murugan   | Data Structures           |
+| Charu      | Latha     | Database Management       |
+| Deepa      | Malar     | Operating Systems         |
+| Eshwar     | Sekar     | Computer Networks         |
+| Farah      | Nisha     | Web Development           |
+| Gokul      | Nathan    | Software Engineering      |
+| Hari       | Prasad    | Artificial Intelligence   |
+| Indra      | Devi      | Machine Learning          |
+| Jeeva      | Rani      | Cloud Computing           |
++------------+-----------+---------------------------+
+10 rows in set (0.00 sec)
+
+5. mysql> SELECT t.first_name, t.last_name, c.course_name FROM Teacher t JOIN Courses c ON t.teacher_id = c.teacher_id;
++------------+-----------+---------------------------+
+| first_name | last_name | course_name               |
++------------+-----------+---------------------------+
+| Mohan      | Das       | Introduction to Computing |
+| Nila       | Mani      | Data Structures           |
+| Oviya      | Murali    | Database Management       |
+| Prakash    | Kumar     | Operating Systems         |
+| Siva       | Perumal   | Computer Networks         |
+| Siva       | Perumal   | Web Development           |
+| Tara       | Anbu      | Software Engineering      |
+| Uma        | Raj       | Artificial Intelligence   |
+| Vijay      | Antony    | Machine Learning          |
+| Yogi       | Babu      | Cloud Computing           |
++------------+-----------+---------------------------+
+10 rows in set (0.00 sec)
+
+6. mysql> SELECT s.first_name, s.last_name, e.enrollment_date FROM Students s JOIN Enrollments e ON s.student_id = e.student_id JOIN Courses c ON e.course_id = c.course_id;
++------------+-----------+-----------------+
+| first_name | last_name | enrollment_date |
++------------+-----------+-----------------+
+| Arun       | Kumar     | 2023-02-01      |
+| Bala       | Murugan   | 2023-02-01      |
+| Charu      | Latha     | 2023-02-01      |
+| Deepa      | Malar     | 2023-02-01      |
+| Eshwar     | Sekar     | 2023-02-01      |
+| Farah      | Nisha     | 2023-02-01      |
+| Gokul      | Nathan    | 2023-02-01      |
+| Hari       | Prasad    | 2023-02-01      |
+| Indra      | Devi      | 2023-02-01      |
+| Jeeva      | Rani      | 2023-02-01      |
++------------+-----------+-----------------+
+10 rows in set (0.00 sec)
+
+7. mysql> SELECT s.student_id, s.first_name, s.last_name FROM Students s LEFT JOIN Payments p ON s.student_id = p.student_id WHERE p.payment_id IS NULL;
+Empty set (0.00 sec)
+
+8. mysql> SELECT c.course_id, c.course_name FROM Courses c LEFT JOIN Enrollments e ON c.course_id = e.course_id WHERE e.student_id IS NULL;
+Empty set (0.00 sec)
+
+9. mysql> SELECT e.student_id, s.first_name, s.last_name, COUNT(e.course_id) FROM Enrollments e JOIN Students s ON e.student_id = s.student_id GROUP BY e.student_id HAVING COUNT(e.course_id) > 1;
+
+Empty set (0.00 sec)
+
+10. mysql> SELECT t.teacher_id, t.first_name, t.last_name FROM Teacher t LEFT JOIN Courses c ON t.teacher_id = c.teacher_id WHERE c.course_id IS NULL;
++------------+------------+-----------+
+| teacher_id | first_name | last_name |
++------------+------------+-----------+
+|          5 | Rani       | Mukherjee |
++------------+------------+-----------+
+1 row in set (0.00 sec)
+
+
+
+-----TASK 4-----
+
+
+
+1. mysql>  SELECT AVG(student_count) FROM (SELECT COUNT(student_id) AS student_count FROM Enrollments GROUP BY course_id) AS e_count;
++--------------------+
+| AVG(student_count) |
++--------------------+
+|             1.0000 |
++--------------------+
+1 row in set (0.00 sec)
+
+2. mysql> SELECT S.first_name, S.last_name FROM Students S INNER JOIN Payments P ON s.student_id = p.student_id WHERE p.amount = (SELECT MAX(amount) FROM Payments);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Deepa      | Malar     |
++------------+-----------+
+1 row in set (0.00 sec)
+
+3. mysql> SELECT C.Course_name, COUNT(e.student_id) FROM Courses C JOIN  Enrollments e ON c.course_id = e.course_id GROUP BY c.course_id HAVING COUNT(e.student_id) = (SELECT MAX(e_count) FROM (SELECT COUNT(Student_id) AS E_count FROM Enrollments GROUP BY course_id) AS ENRL);
++---------------------------+---------------------+
+| Course_name               | COUNT(e.student_id) |
++---------------------------+---------------------+
+| Introduction to Computing |                   1 |
+| Data Structures           |                   1 |
+| Database Management       |                   1 |
+| Operating Systems         |                   1 |
+| Computer Networks         |                   1 |
+| Web Development           |                   1 |
+| Software Engineering      |                   1 |
+| Artificial Intelligence   |                   1 |
+| Machine Learning          |                   1 |
+| Cloud Computing           |                   1 |
++---------------------------+---------------------+
+10 rows in set (0.00 sec)
+
+4. mysql> SELECT t.teacher_id, t.first_name, t.last_name, IFNULL(sum_course_payments.total_payments, 0) AS total_payments FROM Teacher t LEFT JOIN (SELECT c.teacher_id, SUM(p.amount) AS total_payments FROM Courses c JOIN Enrollments e ON c.course_id = e.course_id JOIN Payments p ON e.student_id = p.student_id GROUP BY c.teacher_id) sum_course_payments ON t.teacher_id = sum_course_payments.teacher_id;
++------------+------------+-----------+----------------+
+| teacher_id | first_name | last_name | total_payments |
++------------+------------+-----------+----------------+
+|          1 | Mohan      | Das       |        1500.00 |
+|          2 | Nila       | Mani      |        1200.00 |
+|          3 | Oviya      | Murali    |        1300.00 |
+|          4 | Prakash    | Kumar     |        1700.00 |
+|          5 | Rani       | Mukherjee |           0.00 |
+|          6 | Siva       | Perumal   |        2550.00 |
+|          7 | Tara       | Anbu      |        1350.00 |
+|          8 | Uma        | Raj       |        1550.00 |
+|          9 | Vijay      | Antony    |        1250.00 |
+|         10 | Yogi       | Babu      |        1400.00 |
++------------+------------+-----------+----------------+
+10 rows in set (0.01 sec)
+
+
+5. mysql> SELECT s.student_id, s.first_name, s.last_name FROM Students s JOIN Enrollments e ON s.student_id = e.student_id GROUP BY s.student_id HAVING COUNT(e.course_id) = (SELECT COUNT(course_id) FROM Courses);
+Empty set (0.01 sec)
+
+6. mysql> SELECT t.teacher_id, t.first_name, t.last_name FROM Teacher t LEFT JOIN Courses c ON t.teacher_id = c.teacher_id WHERE c.course_id IS NULL;
++------------+------------+-----------+
+| teacher_id | first_name | last_name |
++------------+------------+-----------+
+|          5 | Rani       | Mukherjee |
++------------+------------+-----------+
+1 row in set (0.00 sec)
+
+7. mysql> SELECT AVG(age) FROM (SELECT TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age FROM Students) AS sages;
++----------+
+| AVG(age) |
++----------+
+|  18.9000 |
++----------+
+1 row in set (0.00 sec)
+
+8. mysql> SELECT course_id, course_name FROM Courses WHERE course_id NOT IN (SELECT course_id FROM Enrollments);
+Empty set (0.00 sec)
+
+9. mysql> SELECT e.student_id, e.course_id, SUM(p.amount) FROM Enrollments e JOIN Payments p ON e.student_id = p.student_id GROUP BY e.student_id;
++------------+-----------+---------------+
+| student_id | course_id | SUM(p.amount) |
++------------+-----------+---------------+
+|          1 |         1 |       1500.00 |
+|          2 |         2 |       1200.00 |
+|          3 |         3 |       1300.00 |
+|          4 |         4 |       1700.00 |
+|          5 |         5 |       1100.00 |
+|          6 |         6 |       1450.00 |
+|          7 |         7 |       1350.00 |
+|          8 |         8 |       1550.00 |
+|          9 |         9 |       1250.00 |
+|         10 |        10 |       1400.00 |
++------------+-----------+---------------+
+10 rows in set (0.00 sec)
+
+10. mysql> SELECT student_id, COUNT(payment_id) FROM Payments GROUP BY student_id HAVING COUNT(payment_id) > 1;
+Empty set (0.00 sec)
+
+11. mysql> SELECT s.student_id, s.first_name, s.last_name, SUM(p.amount) FROM Students s JOIN Payments p ON s.student_id = p.student_id GROUP BY s.student_id;
++------------+------------+-----------+---------------+
+| student_id | first_name | last_name | SUM(p.amount) |
++------------+------------+-----------+---------------+
+|          1 | Arun       | Kumar     |       1500.00 |
+|          2 | Bala       | Murugan   |       1200.00 |
+|          3 | Charu      | Latha     |       1300.00 |
+|          4 | Deepa      | Malar     |       1700.00 |
+|          5 | Eshwar     | Sekar     |       1100.00 |
+|          6 | Farah      | Nisha     |       1450.00 |
+|          7 | Gokul      | Nathan    |       1350.00 |
+|          8 | Hari       | Prasad    |       1550.00 |
+|          9 | Indra      | Devi      |       1250.00 |
+|         10 | Jeeva      | Rani      |       1400.00 |
++------------+------------+-----------+---------------+
+10 rows in set (0.00 sec)
+
+12. mysql> SELECT c.course_name, COUNT(e.student_id) FROM Courses c JOIN Enrollments e ON c.course_id = e.course_id GROUP BY c.course_name;
++---------------------------+---------------------+
+| course_name               | COUNT(e.student_id) |
++---------------------------+---------------------+
+| Introduction to Computing |                   1 |
+| Data Structures           |                   1 |
+| Database Management       |                   1 |
+| Operating Systems         |                   1 |
+| Computer Networks         |                   1 |
+| Web Development           |                   1 |
+| Software Engineering      |                   1 |
+| Artificial Intelligence   |                   1 |
+| Machine Learning          |                   1 |
+| Cloud Computing           |                   1 |
++---------------------------+---------------------+
+10 rows in set (0.00 sec)
+
+13. mysql> SELECT s.student_id, AVG(p.amount) FROM Students s JOIN Payments p ON s.student_id = p.student_id GROUP BY s.student_id;
++------------+---------------+
+| student_id | AVG(p.amount) |
++------------+---------------+
+|          1 |   1500.000000 |
+|          2 |   1200.000000 |
+|          3 |   1300.000000 |
+|          4 |   1700.000000 |
+|          5 |   1100.000000 |
+|          6 |   1450.000000 |
+|          7 |   1350.000000 |
+|          8 |   1550.000000 |
+|          9 |   1250.000000 |
+|         10 |   1400.000000 |
++------------+---------------+
+10 rows in set (0.00 sec)
